@@ -46,7 +46,7 @@ const buttonsConfig = [
   },
   {
     text: "Register Your Interest",
-    size: "clamp(10rem, 30vw, 30rem)",
+    size: "clamp(11rem, 33vw, 33rem)",
     x: "55%",
     y: "72%",
     icon: <HowToRegIcon sx={{ fontSize: "clamp(3.5rem, 11vw, 13rem)" }} />,
