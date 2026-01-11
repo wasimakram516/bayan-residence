@@ -22,6 +22,7 @@ import kioskConfig from "../../../public/config/kiosk-media.json";
 const buttonsConfig = [
   {
     text: "Photos",
+    modalKey: "photos",
     size: "clamp(9rem, 30vw, 30rem)",
     x: "15%",
     y: "30%",
@@ -30,6 +31,7 @@ const buttonsConfig = [
   },
   {
     text: "Brochure",
+    modalKey: "brochure",
     size: "clamp(11rem, 34vw, 34rem)",
     x: "55%",
     y: "38%",
@@ -38,6 +40,7 @@ const buttonsConfig = [
   },
   {
     text: "Location",
+    modalKey: "location",
     size: "clamp(11rem, 34vw, 34rem)",
     x: "12%",
     y: "62%",
@@ -46,6 +49,7 @@ const buttonsConfig = [
   },
   {
     text: "Register Your Interest",
+    modalKey: "sign-up", 
     size: "clamp(11rem, 33vw, 33rem)",
     x: "55%",
     y: "72%",
@@ -155,7 +159,7 @@ export default function MenuPage() {
           <Button
             key={index}
             variant="contained"
-            onClick={(e) => handleClick(e, btn.text.toLowerCase())}
+            onClick={(e) => handleClick(e, btn.modalKey)}
             sx={{
               position: "absolute",
               top: btn.y,

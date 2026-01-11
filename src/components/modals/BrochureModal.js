@@ -171,7 +171,7 @@ export default function BrochureModal({ open, onClose, brochure }) {
       </DialogContent>
 
       {/* FLOATING ZOOM CONTROLS */}
-      <Paper
+      {/* <Paper
         elevation={4}
         sx={{
           position: "absolute",
@@ -218,7 +218,7 @@ export default function BrochureModal({ open, onClose, brochure }) {
         >
           <AddIcon />
         </IconButton>
-      </Paper>
+      </Paper> */}
     </Dialog>
   );
 }
