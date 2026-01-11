@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Bayan - ALAA Business Avenue",
+  title: "Bayan Residence",
   description: "Created by WhiteWall Digital solutions",
 };
 
