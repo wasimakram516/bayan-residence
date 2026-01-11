@@ -49,13 +49,30 @@ export default function BrochureModal({ open, onClose, brochure }) {
   };
 
   /* =========================
+     CENTER HORIZONTAL SCROLL
+     (CRITICAL FIX)
+  ========================= */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    if (zoom > 1) {
+      const center = (el.scrollWidth - el.clientWidth) / 2;
+      el.scrollLeft = center;
+    } else {
+      el.scrollLeft = 0;
+    }
+  }, [zoom]);
+
+  /* =========================
      PAGE TRACKING
   ========================= */
   useEffect(() => {
-    if (!containerRef.current) return;
+    const el = containerRef.current;
+    if (!el) return;
 
     const onScroll = () => {
-      const images = containerRef.current.querySelectorAll("img");
+      const images = el.querySelectorAll("img");
       let visibleIndex = 0;
 
       images.forEach((img, index) => {
@@ -68,7 +85,6 @@ export default function BrochureModal({ open, onClose, brochure }) {
       setCurrentPage(visibleIndex + 1);
     };
 
-    const el = containerRef.current;
     el.addEventListener("scroll", onScroll);
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
@@ -143,9 +159,7 @@ export default function BrochureModal({ open, onClose, brochure }) {
           overflowX: zoom > 1 ? "auto" : "hidden",
           p: 0,
           cursor: zoom > 1 ? "grab" : "zoom-in",
-          "&:active": {
-            cursor: "grabbing",
-          },
+          "&:active": { cursor: "grabbing" },
         }}
       >
         {pages.length === 0 ? (
@@ -155,32 +169,32 @@ export default function BrochureModal({ open, onClose, brochure }) {
         ) : (
           <Box
             sx={{
-              transform: `scale(${zoom})`,
-              transformOrigin: "top center",
-              transition: "transform 0.2s ease",
+              width: `${zoom * 100}%`,
+              minWidth: "100%",
+              margin: "0 auto",
             }}
           >
             {pages.map((src, index) => (
-              <Box key={index}>
-                <img
-                  src={src}
-                  alt={`Page ${index + 1}`}
-                  draggable={false}
-                  loading="lazy"
-                  style={{
-                    width: "100%",
-                    display: "block",
-                    margin: 0,
-                    padding: 0,
-                    borderRadius: 0,
-                    background: "white",
-                  }}
-                />
-              </Box>
+              <img
+                key={index}
+                src={src}
+                alt={`Page ${index + 1}`}
+                draggable={false}
+                loading="lazy"
+                style={{
+                  width: "100%",
+                  display: "block",
+                  margin: 0,
+                  padding: 0,
+                  borderRadius: 0,
+                  background: "white",
+                }}
+              />
             ))}
           </Box>
         )}
       </DialogContent>
+
       {/* FLOATING ZOOM + PAGE BAR */}
       <Paper
         elevation={4}
