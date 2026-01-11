@@ -25,7 +25,6 @@ export default function BrochureModal({ open, onClose, brochure }) {
   const containerRef = useRef(null);
 
   const [zoom, setZoom] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
 
   /* =========================
      ZOOM CONTROLS
@@ -50,7 +49,6 @@ export default function BrochureModal({ open, onClose, brochure }) {
 
   /* =========================
      CENTER HORIZONTAL SCROLL
-     (CRITICAL FIX)
   ========================= */
   useEffect(() => {
     const el = containerRef.current;
@@ -63,31 +61,6 @@ export default function BrochureModal({ open, onClose, brochure }) {
       el.scrollLeft = 0;
     }
   }, [zoom]);
-
-  /* =========================
-     PAGE TRACKING
-  ========================= */
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const onScroll = () => {
-      const images = el.querySelectorAll("img");
-      let visibleIndex = 0;
-
-      images.forEach((img, index) => {
-        const rect = img.getBoundingClientRect();
-        if (rect.top < window.innerHeight / 2) {
-          visibleIndex = index;
-        }
-      });
-
-      setCurrentPage(visibleIndex + 1);
-    };
-
-    el.addEventListener("scroll", onScroll);
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
 
   if (!open) return null;
 
@@ -129,7 +102,9 @@ export default function BrochureModal({ open, onClose, brochure }) {
         }}
       >
         <MenuBookIcon fontSize="small" />
-        <Typography variant="subtitle1">Brochure</Typography>
+        <Typography variant="subtitle1">
+          Brochure
+        </Typography>
       </Paper>
 
       {/* Close */}
@@ -195,7 +170,7 @@ export default function BrochureModal({ open, onClose, brochure }) {
         )}
       </DialogContent>
 
-      {/* FLOATING ZOOM + PAGE BAR */}
+      {/* FLOATING ZOOM CONTROLS */}
       <Paper
         elevation={4}
         sx={{
@@ -214,8 +189,8 @@ export default function BrochureModal({ open, onClose, brochure }) {
           zIndex: 1300,
         }}
       >
-        <Typography variant="body2" sx={{ minWidth: 90 }}>
-          Page {currentPage} / {pages.length}
+        <Typography variant="body2" sx={{ minWidth: 70 }}>
+          {Math.round(zoom * 100)}%
         </Typography>
 
         <IconButton
@@ -227,7 +202,11 @@ export default function BrochureModal({ open, onClose, brochure }) {
           <RemoveIcon />
         </IconButton>
 
-        <IconButton size="small" onClick={resetZoom} sx={{ color: "white" }}>
+        <IconButton
+          size="small"
+          onClick={resetZoom}
+          sx={{ color: "white" }}
+        >
           <ZoomOutMapIcon />
         </IconButton>
 
