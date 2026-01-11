@@ -13,6 +13,7 @@ import {
   DialogActions,
   Paper,
   LinearProgress,
+  CircularProgress,
   Grid,
   Snackbar,
   Alert,
@@ -42,6 +43,10 @@ export default function CmsPage() {
   const [imageProgress, setImageProgress] = useState(0);
   const [videoProgress, setVideoProgress] = useState(0);
   const [pdfProgress, setPdfProgress] = useState(0);
+  /* =========================
+   DELETE STATE
+========================= */
+  const [deleting, setDeleting] = useState(false);
 
   /* =========================
      CONFIG
@@ -175,13 +180,39 @@ export default function CmsPage() {
      DELETE
   ========================= */
   const handleDelete = async () => {
-    const res = await fetch(`/api/kiosk/media/${selectedMedia._id}`, {
-      method: "DELETE",
-    });
-    const data = await res.json();
-    setConfig(data.config);
-    setConfirmDeleteOpen(false);
-    setSelectedMedia(null);
+    if (!selectedMedia) return;
+
+    try {
+      setDeleting(true);
+
+      const res = await fetch(`/api/kiosk/media/${selectedMedia._id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Delete failed");
+      }
+
+      const data = await res.json();
+      setConfig(data.config);
+
+      setSnackbar({
+        open: true,
+        message: "Media deleted successfully",
+        severity: "success",
+      });
+
+      setConfirmDeleteOpen(false);
+      setSelectedMedia(null);
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        message: "Failed to delete media",
+        severity: "error",
+      });
+    } finally {
+      setDeleting(false);
+    }
   };
 
   /* =========================
@@ -202,7 +233,7 @@ export default function CmsPage() {
      UI
   ========================= */
   return (
-    <Box sx={{ p: 4, bgcolor: "#f4f6f8", color:"#333", minHeight: "100vh" }}>
+    <Box sx={{ p: 4, bgcolor: "#f4f6f8", color: "#333", minHeight: "100vh" }}>
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" mb={4}>
         <Typography variant="h4" fontWeight={700}>
@@ -222,6 +253,7 @@ export default function CmsPage() {
         files={imageFiles}
         setFiles={setImageFiles}
         uploading={imageUploading}
+        deleting={deleting}
         progress={imageProgress}
         onUpload={() => uploadMedia(imageFiles, "image")}
         items={config?.media?.filter((m) => m.type === "image")}
@@ -240,6 +272,7 @@ export default function CmsPage() {
         files={videoFile ? [videoFile] : []}
         setFiles={(f) => setVideoFile(f[0])}
         uploading={videoUploading}
+        deleting={deleting}
         progress={videoProgress}
         onUpload={() => uploadMedia([videoFile], "video")}
         items={config?.media?.filter((m) => m.type === "video")}
@@ -258,6 +291,7 @@ export default function CmsPage() {
         files={pdfFile ? [pdfFile] : []}
         setFiles={(f) => setPdfFile(f[0])}
         uploading={pdfUploading}
+        deleting={deleting}
         progress={pdfProgress}
         onUpload={() => uploadMedia([pdfFile], "pdf")}
         items={config?.media?.filter((m) => m.type === "pdf")}
@@ -307,7 +341,7 @@ export default function CmsPage() {
       {/* DELETE DIALOG */}
       <Dialog
         open={confirmDeleteOpen}
-        onClose={() => setConfirmDeleteOpen(false)}
+        onClose={deleting ? undefined : () => setConfirmDeleteOpen(false)}
         maxWidth="xs"
         fullWidth
         PaperProps={{
@@ -339,19 +373,34 @@ export default function CmsPage() {
 
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button
-            onClick={() => setConfirmDeleteOpen(false)}
             variant="outlined"
+            disabled={deleting}
+            onClick={() => setConfirmDeleteOpen(false)}
             sx={{ borderRadius: 2 }}
           >
             Cancel
           </Button>
+
           <Button
-            onClick={handleDelete}
             variant="contained"
             color="error"
-            sx={{ borderRadius: 2 }}
+            disabled={deleting}
+            onClick={handleDelete}
+            sx={{
+              borderRadius: 2,
+              minWidth: 110,
+              display: "flex",
+              gap: 1,
+            }}
           >
-            Delete
+            {deleting ? (
+              <>
+                <CircularProgress size={18} color="inherit" />
+                Deleting…
+              </>
+            ) : (
+              "Delete"
+            )}
           </Button>
         </DialogActions>
       </Dialog>
@@ -431,6 +480,7 @@ function MediaSection({
   files,
   setFiles,
   uploading,
+  deleting,
   progress,
   onUpload,
   items = [],
@@ -487,13 +537,18 @@ function MediaSection({
                 />
               )}
               {video && (
-                <video src={m.fileUrl} controls style={{ width: "100%", maxWidth:"400px" }} />
+                <video
+                  src={m.fileUrl}
+                  controls
+                  style={{ width: "100%", maxWidth: "400px" }}
+                />
               )}
               {pdf && <Typography noWrap>{m.fileName}</Typography>}
               <IconButton
                 size="small"
                 sx={{ position: "absolute", top: 4, right: 4 }}
                 onClick={() => onDelete(m)}
+                disabled={uploading || deleting}
               >
                 <DeleteIcon color="error" />
               </IconButton>
