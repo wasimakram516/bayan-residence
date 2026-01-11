@@ -27,7 +27,7 @@ export default function HomePage() {
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('/homeBg.png')",
+          backgroundImage: "url('/homeBgImage.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
