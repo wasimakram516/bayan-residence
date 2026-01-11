@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import {
   Dialog,
@@ -14,7 +15,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Variants for sliding
+/* =========================
+   SLIDE VARIANTS
+========================= */
 const slideVariants = {
   enter: (direction) => ({
     x: direction > 0 ? 300 : -300,
@@ -37,15 +40,18 @@ const slideVariants = {
   }),
 };
 
-export default function PhotosModal({ open, onClose, media }) {
-  const images = media?.filter((m) => m.type === "image") || [];
+export default function PhotosModal({ open, onClose, media = [] }) {
+  const images = media.filter((m) => m.type === "image");
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  /* =========================
+     SLIDESHOW CONTROL
+  ========================= */
   const pauseSlideshow = () => {
     setPaused(true);
-    // Resume after 10s
     setTimeout(() => setPaused(false), 10000);
   };
 
@@ -67,16 +73,23 @@ export default function PhotosModal({ open, onClose, media }) {
     pauseSlideshow();
   };
 
+  /* =========================
+     AUTO PLAY
+  ========================= */
   useEffect(() => {
     if (!open || images.length === 0 || paused) return;
+
     const interval = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000);
+
     return () => clearInterval(interval);
   }, [open, images.length, paused]);
 
-  if (images.length === 0) return null;
+  if (!open || images.length === 0) return null;
+
+  const currentImage = images[currentIndex];
 
   return (
     <Dialog
@@ -95,7 +108,7 @@ export default function PhotosModal({ open, onClose, media }) {
         },
       }}
     >
-      {/* Floating label */}
+      {/* Floating Label */}
       <Paper
         elevation={3}
         sx={{
@@ -118,7 +131,7 @@ export default function PhotosModal({ open, onClose, media }) {
         <Typography variant="subtitle1">Photos</Typography>
       </Paper>
 
-      {/* Close button */}
+      {/* Close Button */}
       <IconButton
         onClick={onClose}
         sx={{
@@ -144,7 +157,7 @@ export default function PhotosModal({ open, onClose, media }) {
           p: 0,
         }}
       >
-        {/* Image with sliding animation */}
+        {/* Image Area */}
         <Box
           sx={{
             position: "relative",
@@ -153,20 +166,19 @@ export default function PhotosModal({ open, onClose, media }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            overflow: "hidden", // only clips the sliding images
+            overflow: "hidden",
           }}
         >
           <AnimatePresence initial={false} custom={direction}>
             <motion.img
               key={currentIndex}
-              src={images[currentIndex].fileUrl}
-              alt={images[currentIndex].fileName}
+              src={currentImage.path}
+              alt={currentImage.title ?? ""}
               custom={direction}
               variants={slideVariants}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.4 }}
               style={{
                 width: "100%",
                 height: "100%",
@@ -179,7 +191,7 @@ export default function PhotosModal({ open, onClose, media }) {
           </AnimatePresence>
         </Box>
 
-        {/* Prev button OUTSIDE image box */}
+        {/* Prev */}
         <IconButton
           onClick={handlePrev}
           sx={{
@@ -196,7 +208,7 @@ export default function PhotosModal({ open, onClose, media }) {
           <ArrowBackIosNewIcon />
         </IconButton>
 
-        {/* Next button OUTSIDE image box */}
+        {/* Next */}
         <IconButton
           onClick={handleNext}
           sx={{

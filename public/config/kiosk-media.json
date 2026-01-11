@@ -1,0 +1,141 @@
+{
+  "location": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d271.9624879083189!2d58.447041!3d23.592910000000064!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ff1dde492bb7%3A0x610b8e29fb1bb2c8!2sBayan%20Residence!5e1!3m2!1sen!2som!4v1768148510552!5m2!1sen!2som",
+  "signupLink": "https://eventpass-whitewall.vercel.app/en/event/bayan-residence-msq",
+  "media": [
+    {
+      "id": "img-001",
+      "type": "image",
+      "title": "Bedroom",
+      "path": "/media/images/1.jpg",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-002",
+      "type": "image",
+      "title": "Gym",
+      "path": "/media/images/2.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-003",
+      "type": "image",
+      "title": "Kitchen",
+      "path": "/media/images/3.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-004",
+      "type": "image",
+      "title": "Living Room",
+      "path": "/media/images/4.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-005",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/5.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-006",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/6.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-007",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/7.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-008",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/8.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-009",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/9.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-010",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/10.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-011",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/11.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "img-012",
+      "type": "image",
+      "title": "Living / Dining",
+      "path": "/media/images/12.png",
+      "uploadedAt": "2025-12-01T10:30:00Z"
+    },
+    {
+      "id": "pdf-001",
+      "type": "pdf_images",
+      "title": "Bayan Residence Brochure",
+      "pages": [
+        "/media/pdfs/bayan/bayan_page-0001.jpg",
+        "/media/pdfs/bayan/bayan_page-0002.jpg",
+        "/media/pdfs/bayan/bayan_page-0003.jpg",
+        "/media/pdfs/bayan/bayan_page-0004.jpg",
+        "/media/pdfs/bayan/bayan_page-0005.jpg",
+        "/media/pdfs/bayan/bayan_page-0006.jpg",
+        "/media/pdfs/bayan/bayan_page-0007.jpg",
+        "/media/pdfs/bayan/bayan_page-0008.jpg",
+        "/media/pdfs/bayan/bayan_page-0009.jpg",
+        "/media/pdfs/bayan/bayan_page-0010.jpg",
+        "/media/pdfs/bayan/bayan_page-0011.jpg",
+        "/media/pdfs/bayan/bayan_page-0012.jpg",
+        "/media/pdfs/bayan/bayan_page-0013.jpg",
+        "/media/pdfs/bayan/bayan_page-0014.jpg",
+        "/media/pdfs/bayan/bayan_page-0015.jpg",
+        "/media/pdfs/bayan/bayan_page-0016.jpg",
+        "/media/pdfs/bayan/bayan_page-0017.jpg",
+        "/media/pdfs/bayan/bayan_page-0018.jpg",
+        "/media/pdfs/bayan/bayan_page-0019.jpg",
+        "/media/pdfs/bayan/bayan_page-0020.jpg",
+        "/media/pdfs/bayan/bayan_page-0021.jpg",
+        "/media/pdfs/bayan/bayan_page-0022.jpg",
+        "/media/pdfs/bayan/bayan_page-0023.jpg",
+        "/media/pdfs/bayan/bayan_page-0024.jpg",
+        "/media/pdfs/bayan/bayan_page-0025.jpg",
+        "/media/pdfs/bayan/bayan_page-0026.jpg",
+        "/media/pdfs/bayan/bayan_page-0027.jpg",
+        "/media/pdfs/bayan/bayan_page-0028.jpg",
+        "/media/pdfs/bayan/bayan_page-0029.jpg",
+        "/media/pdfs/bayan/bayan_page-0030.jpg",
+        "/media/pdfs/bayan/bayan_page-0031.jpg",
+        "/media/pdfs/bayan/bayan_page-0032.jpg",
+        "/media/pdfs/bayan/bayan_page-0033.jpg",
+        "/media/pdfs/bayan/bayan_page-0034.jpg",
+        "/media/pdfs/bayan/bayan_page-0035.jpg",
+        "/media/pdfs/bayan/bayan_page-0036.jpg",
+        "/media/pdfs/bayan/bayan_page-0037.jpg",
+        "/media/pdfs/bayan/bayan_page-0038.jpg",
+        "/media/pdfs/bayan/bayan_page-0039.jpg",
+        "/media/pdfs/bayan/bayan_page-0040.jpg",
+        "/media/pdfs/bayan/bayan_page-0041.jpg",
+        "/media/pdfs/bayan/bayan_page-0042.jpg",
+        "/media/pdfs/bayan/bayan_page-0043.jpg",
+        "/media/pdfs/bayan/bayan_page-0044.jpg"
+      ]
+    }
+  ]
+}

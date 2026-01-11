@@ -17,6 +17,7 @@ import VideoModal from "@/components/modals/VideoModal";
 import LocationModal from "@/components/modals/LocationModal";
 import SignupModal from "@/components/modals/SignupModal";
 import { useRouter } from "next/navigation";
+import kioskConfig from "../../../public/config/kiosk-media.json";
 
 const buttonsConfig = [
   {
@@ -44,8 +45,8 @@ const buttonsConfig = [
     delay: "1.6s",
   },
   {
-    text: "Sign-Up",
-    size: "clamp(9rem, 30vw, 30rem)",
+    text: "Register Your Interest",
+    size: "clamp(10rem, 30vw, 30rem)",
     x: "55%",
     y: "72%",
     icon: <HowToRegIcon sx={{ fontSize: "clamp(3.5rem, 11vw, 13rem)" }} />,
@@ -70,10 +71,7 @@ export default function MenuPage() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/config")
-      .then((res) => res.json())
-      .then((data) => setConfig(data.config))
-      .catch((err) => console.error("Config fetch error:", err));
+    setConfig(kioskConfig);
   }, []);
 
   const handleClick = (e, modal) => {
@@ -235,7 +233,7 @@ export default function MenuPage() {
       <BrochureModal
         open={openModal === "brochure"}
         onClose={handleClose}
-        fileUrl={config?.media.find((m) => m.type === "pdf")?.fileUrl}
+        brochure={config?.media.find((m) => m.type === "pdf_images")}
       />
       <VideoModal
         open={openModal === "video"}
