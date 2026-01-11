@@ -140,9 +140,12 @@ export default function BrochureModal({ open, onClose, brochure }) {
         sx={{
           height: "100%",
           overflowY: "auto",
-          px: 2,
-          py: 4,
-          cursor: zoom > 1 ? "zoom-out" : "zoom-in",
+          overflowX: zoom > 1 ? "auto" : "hidden",
+          p: 0,
+          cursor: zoom > 1 ? "grab" : "zoom-in",
+          "&:active": {
+            cursor: "grabbing",
+          },
         }}
       >
         {pages.length === 0 ? (
@@ -158,14 +161,7 @@ export default function BrochureModal({ open, onClose, brochure }) {
             }}
           >
             {pages.map((src, index) => (
-              <Box
-                key={index}
-                sx={{
-                  mb: 4,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
+              <Box key={index}>
                 <img
                   src={src}
                   alt={`Page ${index + 1}`}
@@ -173,9 +169,11 @@ export default function BrochureModal({ open, onClose, brochure }) {
                   loading="lazy"
                   style={{
                     width: "100%",
-                    maxWidth: 900,
-                    borderRadius: 8,
-                    background: "#f5f5f5",
+                    display: "block",
+                    margin: 0,
+                    padding: 0,
+                    borderRadius: 0,
+                    background: "white",
                   }}
                 />
               </Box>
