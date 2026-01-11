@@ -1,0 +1,10 @@
+{
+  "appId": "com.whitewall.bayan",
+  "appName": "Bayan Residence MSQ",
+  "webDir": "out",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://bayan-whitewall.vercel.app",
+    "cleartext": true
+  }
+}
